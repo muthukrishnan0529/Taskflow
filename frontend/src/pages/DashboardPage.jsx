@@ -230,108 +230,143 @@ export default function DashboardPage() {
       </Grid>
 
       {/* Progress + Recent Tasks */}
-      <Grid container spacing={2.5}>
+      <Grid container spacing={2}>
         {/* Progress Card */}
         {!loading && stats?.total > 0 && (
           <Grid item xs={12} md={4}>
             <Card sx={{ height: "100%" }}>
-              <CardContent sx={{ p: 3 }}>
+              <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
                 <Typography
                   variant="subtitle1"
                   fontWeight={600}
-                  mb={2.5}
+                  mb={2}
                   color="text.primary"
                 >
                   Overall Progress
                 </Typography>
+
+                {/* Mobile: row, Desktop: column */}
                 <Box
-                  sx={{ position: "relative", display: "inline-flex", mb: 2 }}
+                  sx={{
+                    display: "flex",
+                    flexDirection: { xs: "row", md: "column" },
+                    alignItems: { xs: "center", md: "flex-start" },
+                    gap: { xs: 3, md: 2 },
+                  }}
                 >
-                  <CircularProgress
-                    variant="determinate"
-                    value={completionRate}
-                    size={100}
-                    thickness={5}
-                    sx={{ color: "primary.main" }}
-                  />
-                  <CircularProgress
-                    variant="determinate"
-                    value={100}
-                    size={100}
-                    thickness={5}
-                    sx={{
-                      color: "rgba(255,255,255,0.07)",
-                      position: "absolute",
-                      left: 0,
-                    }}
-                  />
+                  {/* Circle */}
                   <Box
                     sx={{
-                      top: 0,
-                      left: 0,
-                      bottom: 0,
-                      right: 0,
-                      position: "absolute",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      position: "relative",
+                      display: "inline-flex",
+                      flexShrink: 0,
                     }}
                   >
-                    <Typography
-                      variant="h6"
-                      fontWeight={700}
-                      color="text.primary"
-                    >
-                      {completionRate}%
-                    </Typography>
-                  </Box>
-                </Box>
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                  {[
-                    {
-                      label: "Completed",
-                      val: stats.completed,
-                      color: "#4CAF50",
-                    },
-                    {
-                      label: "In Progress",
-                      val: stats.in_progress,
-                      color: "#2979FF",
-                    },
-                    { label: "Pending", val: stats.pending, color: "#FF9800" },
-                  ].map((r) => (
-                    <Box
-                      key={r.label}
+                    <CircularProgress
+                      variant="determinate"
+                      value={completionRate}
+                      size={90}
+                      thickness={5}
+                      sx={{ color: "primary.main" }}
+                    />
+                    <CircularProgress
+                      variant="determinate"
+                      value={100}
+                      size={90}
+                      thickness={5}
                       sx={{
+                        color: "rgba(255,255,255,0.07)",
+                        position: "absolute",
+                        left: 0,
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        top: 0,
+                        left: 0,
+                        bottom: 0,
+                        right: 0,
+                        position: "absolute",
                         display: "flex",
-                        justifyContent: "space-between",
                         alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
-                      <Box
-                        sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                      >
-                        <Box
-                          sx={{
-                            width: 8,
-                            height: 8,
-                            borderRadius: "50%",
-                            bgcolor: r.color,
-                          }}
-                        />
-                        <Typography variant="body2" color="text.secondary">
-                          {r.label}
-                        </Typography>
-                      </Box>
                       <Typography
-                        variant="body2"
-                        fontWeight={600}
+                        fontWeight={700}
                         color="text.primary"
+                        fontSize="1rem"
                       >
-                        {r.val}
+                        {completionRate}%
                       </Typography>
                     </Box>
-                  ))}
+                  </Box>
+
+                  {/* Stats list */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 1,
+                      flex: 1,
+                      minWidth: 0,
+                    }}
+                  >
+                    {[
+                      {
+                        label: "Completed",
+                        val: stats.completed,
+                        color: "#4CAF50",
+                      },
+                      {
+                        label: "In Progress",
+                        val: stats.in_progress,
+                        color: "#2979FF",
+                      },
+                      {
+                        label: "Pending",
+                        val: stats.pending,
+                        color: "#FF9800",
+                      },
+                    ].map((r) => (
+                      <Box
+                        key={r.label}
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Box
+                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                        >
+                          <Box
+                            sx={{
+                              width: 8,
+                              height: 8,
+                              borderRadius: "50%",
+                              bgcolor: r.color,
+                              flexShrink: 0,
+                            }}
+                          />
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
+                          >
+                            {r.label}
+                          </Typography>
+                        </Box>
+                        <Typography
+                          variant="body2"
+                          fontWeight={600}
+                          color="text.primary"
+                        >
+                          {r.val}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
                 </Box>
               </CardContent>
             </Card>
@@ -439,20 +474,20 @@ export default function DashboardPage() {
                           }}
                         />
                         <Box
-                          // sx={{
-                          //   display: "flex",
-                          //   gap: 1,
-                          //   alignItems: "center",
-                          //   flexShrink: 0,
-                          // }}
                           sx={{
                             display: "flex",
-                            gap: 0.5,
+                            gap: 1,
                             alignItems: "center",
                             flexShrink: 0,
-                            flexDirection: { xs: "column", sm: "row" },
-                            alignItems: { xs: "flex-end", sm: "center" },
                           }}
+                          // sx={{
+                          //   display: "flex",
+                          //   gap: 0.5,
+                          //   alignItems: "center",
+                          //   flexShrink: 0,
+                          //   flexDirection: { xs: "column", sm: "row" },
+                          //   alignItems: { xs: "flex-end", sm: "center" },
+                          // }}
                         >
                           {task.is_overdue && (
                             <Chip label="Overdue" size="small" color="error" />

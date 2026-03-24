@@ -439,20 +439,20 @@ export default function DashboardPage() {
                           }}
                         />
                         <Box
-                          sx={{
-                            display: "flex",
-                            gap: 1,
-                            alignItems: "center",
-                            flexShrink: 0,
-                          }}
                           // sx={{
                           //   display: "flex",
-                          //   gap: 0.5,
+                          //   gap: 1,
                           //   alignItems: "center",
                           //   flexShrink: 0,
-                          //   flexDirection: { xs: "column", sm: "row" },
-                          //   alignItems: { xs: "flex-end", sm: "center" },
                           // }}
+                          sx={{
+                            display: "flex",
+                            gap: 0.5,
+                            alignItems: "center",
+                            flexShrink: 0,
+                            flexDirection: { xs: "column", sm: "row" },
+                            alignItems: { xs: "flex-end", sm: "center" },
+                          }}
                         >
                           {task.is_overdue && (
                             <Chip label="Overdue" size="small" color="error" />

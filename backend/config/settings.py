@@ -67,9 +67,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Live run
 DATABASES = {
     "default": dj_database_url.config(
-        default=config(
-            "postgresql://taskflow_db_a0ta_user:PTN6y7QDyKbGHeT6w1XVXUgwci8EMp6C@dpg-d713io3uibrs739mvchg-a.oregon-postgres.render.com/taskflow_db_a0ta"
-        )
+        default=config("DATABASE_URL")
     )
 }
 

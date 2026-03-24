@@ -3,3 +3,4 @@ frontend/node_modules/
 backend/venv/
 .env
 *.sqlite3
+backend/staticfiles/

@@ -1,6 +1,7 @@
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -55,11 +56,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
+# Local run
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+# Live run
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.config(
+        default=config(
+            "postgresql://taskflow_db_a0ta_user:PTN6y7QDyKbGHeT6w1XVXUgwci8EMp6C@dpg-d713io3uibrs739mvchg-a.oregon-postgres.render.com/taskflow_db_a0ta"
+        )
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [

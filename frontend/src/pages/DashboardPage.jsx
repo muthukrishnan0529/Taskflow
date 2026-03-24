@@ -103,7 +103,8 @@ export default function DashboardPage() {
     stats?.total > 0 ? Math.round((stats.completed / stats.total) * 100) : 0;
 
   return (
-    <Box sx={{ maxWidth: 1100, mx: "auto" }}>
+    // <Box sx={{ maxWidth: 1100, mx: "auto" }}>
+    <Box sx={{ maxWidth: 1100, mx: "auto", overflowX: "hidden" }}>
       {/* Header */}
       <Box
         sx={{
@@ -118,6 +119,7 @@ export default function DashboardPage() {
           justifyContent: "space-between",
           flexWrap: "wrap",
           gap: 2,
+          minWidth: 0,
         }}
       >
         <Box>
@@ -400,7 +402,15 @@ export default function DashboardPage() {
                   {recentTasks.map((task, i) => (
                     <Box key={task.id}>
                       {i > 0 && <Divider />}
-                      <ListItem sx={{ px: 3, py: 1.5, gap: 1.5 }}>
+                      {/* <ListItem sx={{ px: 3, py: 1.5, gap: 1.5 }}>  */}
+                      <ListItem
+                        sx={{
+                          px: { xs: 2, sm: 3 },
+                          py: 1.5,
+                          gap: 1,
+                          flexWrap: "nowrap",
+                        }}
+                      >
                         <ListItemIcon sx={{ minWidth: "auto" }}>
                           <FiberManualRecordIcon
                             sx={{
@@ -411,6 +421,7 @@ export default function DashboardPage() {
                         </ListItemIcon>
                         <ListItemText
                           primary={task.title}
+                          sx={{ minWidth: 0, flex: 1 }}
                           primaryTypographyProps={{
                             variant: "body2",
                             fontWeight: 500,
@@ -434,6 +445,14 @@ export default function DashboardPage() {
                             alignItems: "center",
                             flexShrink: 0,
                           }}
+                          // sx={{
+                          //   display: "flex",
+                          //   gap: 0.5,
+                          //   alignItems: "center",
+                          //   flexShrink: 0,
+                          //   flexDirection: { xs: "column", sm: "row" },
+                          //   alignItems: { xs: "flex-end", sm: "center" },
+                          // }}
                         >
                           {task.is_overdue && (
                             <Chip label="Overdue" size="small" color="error" />
